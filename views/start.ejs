@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Start</title>
+    <style>
+      body {
+        overflow-x: hidden;
+        margin-top: 20px;
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      input{
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>အိမ်မက် အဘိဓာန်</h1>
+    <h3>Search</h3>
+    <input type="text" list="myList" id="blogInput" />
+    <datalist id="myList">
+      <% if(bhs.length > 0){%> <% for(blog of bhs){%>
+        <input type="hidden" value="<%= blog.BlogId %>" name="bId" />
+        <input type="hidden" value="<%= blog.BlogTitle %>" name="bTitle" />
+        <option value="<%= blog.BlogTitle %>">
+          <%= blog.BlogTitle %>
+        </option>
+      <%}%> <%}else{%>
+      <option></option>
+      <%}%>
+    </datalist>
+ 
+
+    <% if(bhs.length > 0){ %>
+    <div class="row">
+      <% for(blog of bhs){ %>
+      <div class="col-md-2">
+        <div class="card mb-2">
+          <div class="card-body">
+            <h5 class="card-title">
+              <form action="/content" method="POST">
+                <button
+                  type="submit"
+                  class="btn btn-link text-decoration-none text-dark"
+                >
+                  <input type="hidden" value="<%= blog.BlogId %>" name="bId" />
+                  <input
+                    type="hidden"
+                    value="<%= blog.BlogTitle %>"
+                    name="bTitle"
+                  />
+                  <%= blog.BlogTitle %>
+                </button>
+              </form>
+            </h5>
+          </div>
+        </div>
+      </div>
+
+      <% } %>
+    </div>
+    <% } else { %>
+    <h1>no</h1>
+    <% } %>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
